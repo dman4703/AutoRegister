@@ -17,6 +17,9 @@ def login():
 
 
 def selectTerm():
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "toggle_1"))).click()
+    driver.find_element(By.XPATH, '//a[@href="https://sso.uga.edu/cas/login?TARGET=https%3A%2F%2Fathena-prod.uga.edu%2FStudentRegistrationSsb%2Flogin%2Fcas"]').click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "registerLink"))).click()
     driver.get('https://athena-prod.uga.edu/StudentRegistrationSsb/ssb/term/termSelection?mode=registration')
     dropdown = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.ID, "txt_term")))
@@ -95,7 +98,7 @@ def unregister(crn):
 
 login()
 selectTerm()
-findCourse('CSCI', '4300')
+''' findCourse('CSCI', '4300')
 if checkCourseAvailability(44457):
     unregister(59894)
     register(44457)
@@ -103,4 +106,4 @@ elif checkCourseAvailability(31786):
     unregister(59894)
     register(31786)
 else:
-    print("No seats available")
+    print("No seats available")'''
