@@ -9,7 +9,7 @@ carriers = {
 }
 
 
-def send(number, carrier, message):
+def send(number, carrier, subject, message):
     # Replace the number with your own, or consider using an argument\dict for multiple people.
     to_number = f"{number}{carriers[carrier]}"
     auth = (os.environ.get('ARemail'), os.environ.get('ARpass'))
@@ -20,4 +20,6 @@ def send(number, carrier, message):
     server.login(auth[0], auth[1])
 
     # Send text message through SMS gateway of destination number
-    server.sendmail(auth[0], to_number, message)
+    recipients = [to_number, os.environ.get('email')]
+    server.sendmail(auth[0], recipients, f"Subject: {subject}\n\n{message}")
+    server.quit()
